@@ -1,0 +1,20 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-docker-compose
+{
+  "name": "wagtail-bakerydemo",
+  // NOTE: The context for image builds will be the directory of the first file listed. In this case, the root of the repository.
+  "dockerComposeFile": [
+    // Re-use definitions for postgres and redis for development.
+    "../docker-compose.yml",
+    "docker-compose.yml"
+  ],
+  "service": "app",
+
+  // This folder is our project folder within the container.
+  "workspaceFolder": "/workspace",
+
+  // Initial setup when creating the container.
+  "postCreateCommand": {
+    "collectstatic": "DATABASE_URL=postgres://none REDIS_URL=none python manage.py collectstatic --noinput"
+  }
+}

@@ -31,8 +31,10 @@ services:
     links:
       - db:db
       - redis:redis
-    ports:
-      - '8000:8000'
+    # We do not expose a port here, but rely on the VS Code within devcontainer
+    # to forward that port for us.
+    # ports:
+    #   - '8000:8000'
     depends_on:
       - db
       - redis
